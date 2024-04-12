@@ -10,7 +10,11 @@ const float SCREEN_H = 675.0f;
 
 class Renderer
 {
+	sf::Texture wallTexture;
+	sf::Sprite wallSprite;
+
 public:
+	void init();
 	void draw3dView(sf::RenderTarget& target, const Player& player, const Map& map);
 	void drawRays(sf::RenderTarget& target, const Player& player, const Map& map);
 };

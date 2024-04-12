@@ -1,15 +1,31 @@
 #include "map.h"
+#include <iostream>
 
 Map::Map(float cellSize, int width, int height)
 	: cellSize(cellSize)
-	, grid(height, std::vector(width, 0))
+	, grid(height, std::vector(width, sf::Color::Black))
 {
 }
 
-Map::Map(float cellSize, std::vector<std::vector<int>> grid)
+Map::Map(float cellSize, const std::string& fileName)
 	: cellSize(cellSize)
-	, grid(grid)
 {
+	sf::Image image;
+	if (!image.loadFromFile(fileName))
+	{
+		std::cerr << "Failed to load map image!\n";
+		return;
+	}
+
+	grid = std::vector(image.getSize().y, std::vector(image.getSize().x, sf::Color::Black));
+
+	for (size_t y = 0; y < image.getSize().y; y++)
+	{
+		for (size_t x = 0; x < image.getSize().x; x++)
+		{
+			grid[y][x] = image.getPixel(x, y);
+		}
+	}
 }
 
 void Map::draw(sf::RenderTarget& target)
@@ -27,14 +43,7 @@ void Map::draw(sf::RenderTarget& target)
 	{
 		for (size_t x = 0; x < grid[y].size(); x++)
 		{
-			if (grid[y][x] == 0)
-			{
-				cell.setFillColor(sf::Color(70, 70, 70));
-			}
-			else if (grid[y][x] == 1)
-			{
-				cell.setFillColor(sf::Color::Green);
-			}
+			cell.setFillColor(grid[y][x]);
 
 			cell.setPosition(sf::Vector2f(x, y) * cellSize + sf::Vector2f(cellSize * 0.025, cellSize * 0.025));
 
@@ -43,7 +52,7 @@ void Map::draw(sf::RenderTarget& target)
 	}
 }
 
-const std::vector<std::vector<int>>& Map::getGrid() const
+const std::vector<std::vector<sf::Color>>& Map::getGrid() const
 {
 	return grid;
 }

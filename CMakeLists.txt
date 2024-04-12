@@ -6,11 +6,13 @@ option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
 
 include(FetchContent)
 
+# Fetch and include SFML
 FetchContent_Declare(SFML
     GIT_REPOSITORY https://github.com/SFML/SFML.git
     GIT_TAG 2.6.x)
 FetchContent_MakeAvailable(SFML)
 
+# Fetch and include ImGui
 FetchContent_Declare(ImGui
     GIT_REPOSITORY https://github.com/ocornut/imgui
     GIT_TAG v1.89.9)
@@ -25,6 +27,9 @@ FetchContent_MakeAvailable(ImGui-SFML)
 
 file(GLOB_RECURSE SOURCES "src/*.cpp")
 file(GLOB_RECURSE HEADERS "src/*.h")
+
+# Copy resources directory to the build directory
+file(COPY resources DESTINATION ${CMAKE_BINARY_DIR})
 
 add_executable(RaycasterCMake ${SOURCES} ${HEADERS})
 target_link_libraries(RaycasterCMake PRIVATE sfml-graphics ImGui-SFML::ImGui-SFML)
