@@ -6,9 +6,7 @@
 
 int main()
 {
-    const int wWidth = 1200;
-    const int wHeight = 675;
-    sf::RenderWindow window(sf::VideoMode(wWidth, wHeight), "Raycaster");
+    sf::RenderWindow window(sf::VideoMode(SCREEN_W, SCREEN_H), "Raycaster", sf::Style::Close | sf::Style::Titlebar);
     window.setFramerateLimit(60);
 
     sf::Clock deltaClock;
@@ -17,15 +15,15 @@ int main()
 
     std::vector<std::vector<int>> grid = {
         {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-        {1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1},
-        {1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1},
-        {1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1},
-        {1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1},
-        {1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1},
+        {1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1},
+        {1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1},
+        {1, 0, 1, 0, 1, 1, 1, 0, 0, 1, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1},
         {1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1},
-        {1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1},
-        {1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 1},
-        {1, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1},
+        {1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1},
+        {1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1},
         {1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1},
         {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
     };
@@ -63,9 +61,11 @@ int main()
         //render
         window.clear();
 
-        map.draw(window);
+        renderer.draw3dView(window, player, map);
+
+        /*map.draw(window);
         renderer.drawRays(window, player, map);
-        player.draw(window);
+        player.draw(window);*/
 
         window.display();
     }
