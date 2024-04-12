@@ -1,9 +1,9 @@
 #include "Player.h"
 #include <cmath>
 
-const float PI = 3.14159265359f;
-const float TURN_SPEED = 100.0f;
-const float MOVE_SPEED = 100.0f;
+constexpr float PI = 3.14159265359f;
+constexpr float TURN_SPEED = PLAYER_TURN_SPEED;
+constexpr float MOVE_SPEED = 100.0f;
 
 void Player::draw(sf::RenderTarget& target)
 {

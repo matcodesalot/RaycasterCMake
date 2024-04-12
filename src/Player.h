@@ -3,10 +3,12 @@
 #include <SFML/Graphics.hpp>
 #include "Vec2.h"
 
+constexpr float PLAYER_TURN_SPEED = 100.0f;
+
 class Player
 {
 public:
-	Vec2 position = { 0.0f, 0.0f };
+	sf::Vector2f position = { 0.0f, 0.0f };
 	float angle = 0.0f;
 
 	void draw(sf::RenderTarget& target);

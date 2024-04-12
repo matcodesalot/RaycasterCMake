@@ -3,9 +3,11 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 
+typedef std::vector<std::vector<int>> MapGrid;
+
 class Map
 {
-	std::vector<std::vector<sf::Color>> grid;
+	MapGrid grid;
 	float cellSize;
 
 public:
@@ -13,7 +15,11 @@ public:
 	Map(float cellSize, const std::string& fileName);
 
 	void draw(sf::RenderTarget& target);
+	void setMapCell(int x, int y, int value);
 
-	const std::vector<std::vector<sf::Color>>& getGrid() const;
+	const MapGrid& getGrid() const;
 	float getCellSize() const;
+
+	size_t getWidth();
+	size_t getHeight();
 };
